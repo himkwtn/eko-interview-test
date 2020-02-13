@@ -70,22 +70,31 @@ function groupSameLetter(arr) {
     return sameLetterArr.map(i => group(i));
 }
 
-console.log(
-    groupSameLetter([
-        'AMOR',
-        'XISELA',
-        'JAMON',
-        'ROMA',
-        'OMAR',
-        'MORA',
-        'ESPONJA',
-        'RAMO',
-        'JAPONES',
-        'ARMO',
-        'MOJAN',
-        'MARO',
-        'ORAM',
-        'MONJA',
-        'ALEXIS',
-    ]),
-);
+const input = [
+    'AMOR',
+    'XISELA',
+    'JAMON',
+    'ROMA',
+    'OMAR',
+    'MORA',
+    'ESPONJA',
+    'RAMO',
+    'JAPONES',
+    'ARMO',
+    'MOJAN',
+    'MARO',
+    'ORAM',
+    'MONJA',
+    'ALEXIS'
+];
+console.log(groupSameLetter(input));
+
+const out = input.reduce((acc, curr) => {
+    const sorted = curr
+        .split('')
+        .sort()
+        .join('');
+    const same = acc.has(sorted) ? acc.get(sorted).concat(curr) : [curr];
+    return acc.set(sorted, same);
+}, new Map());
+out.forEach(i => console.log(i.join('-')));
